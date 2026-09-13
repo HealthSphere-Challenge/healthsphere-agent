@@ -83,7 +83,7 @@ EACL 2023.
 
 ## Dataset Size
 
-The main dataset contains approximately:
+Verified local CSV record counts (2026-09-13, excluding header):
 
 ```text
 Training set:   1,201 conversations
@@ -352,3 +352,9 @@ MTS-Dialog is used by HealthSphere as a research and development resource for co
 The HealthSphere AI Agent is intended for informational and educational purposes only.
 
 It must not provide autonomous medical diagnosis or replace consultation with qualified healthcare professionals.
+
+## Evaluation split preservation
+
+Preserve the local training (1,201), validation (100), test-1 (200), and test-2 (200) assignments. All four files have `ID`, `section_header`, `section_text`, `dialogue` columns. Use split-qualified IDs because numeric IDs need not be globally unique. Analyze training material for dialogue patterns, tune with validation, and reserve held-out tests for final evaluation; do not include test dialogue or summaries in prompts, examples or retrieval. Treat summaries as evaluation-only labels when applicable, not conversational evidence known to the user.
+
+Record file hashes, original split, transformations and exclusions in derived fixtures. Check duplicates without silently moving examples across splits; report contamination/exclusion decisions. Conversation clinical content is not automatically approved medical guidance. See [Agent evaluation](../../docs/evaluation/EVALUATION_STRATEGY.md).
