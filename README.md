@@ -22,7 +22,7 @@ One account = one health profile; English MVP. Guardian/family/multi-profile acc
 
 ## Local configuration and delivery
 
-Use Python 3.13.11 and `uv`. Run `uv sync --locked --dev`, build the ignored local index with `uv run healthsphere-build-index`, then configure `.env` and start `uv run uvicorn app.main:app --factory`. Run `uv run ruff format --check .`, `uv run ruff check .`, and `uv run pytest` before review. See the implementation guide for API, safety, evaluation, and provider configuration.
+Use Python 3.13 and `uv`. Run `uv sync --locked --dev`, build the ignored local index with `uv run healthsphere-build-index`, then configure `.env` and start `uv run uvicorn app.main:create_app --factory`. Run `uv run ruff format --check .`, `uv run ruff check .`, and `uv run pytest` before review. See the implementation guide for API, safety, evaluation, and provider configuration.
 
 ## Dataset responsibilities
 
