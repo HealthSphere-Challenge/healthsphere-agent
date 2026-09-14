@@ -1,6 +1,6 @@
 # Agent evaluation strategy
 
-Status: no retrieval index/provider or measured quality exists. HS-013 establishes deterministic fixtures and measured evaluation before integration; HS-015 reviews release evidence.
+Status: HS-013 deterministic MVP evaluation implemented. The full local index achieved 2/2 hit@4 on the versioned known-source cases. The ten-case state/safety run achieved 10/10 response-type correctness, 1/1 urgent recall, 5/5 expected abstentions, and zero score/source-fabrication violations. These tiny samples are regression evidence only. HS-015 reviews broader release evidence.
 
 | Area | Evidence |
 |---|---|

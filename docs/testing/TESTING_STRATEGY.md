@@ -1,6 +1,6 @@
 # Agent testing strategy
 
-Status: planned tooling in HS-013; no runner, CI or runtime yet.
+Status: pytest, deterministic RAG/API/safety fixtures, Ruff, and GitHub Actions CI are implemented by HS-013.
 
 - pytest unit: XML/CSV parsing, empty-answer exclusion, cleaning, chunk metadata, bounded context, safety routing and provider error mapping.
 - Integration: clean/chunk/index round-trip on a small approved corpus fixture, embedding/index compatibility and source traceability; provider adapter simulated deterministically.

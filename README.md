@@ -1,8 +1,8 @@
 # HealthSphere — Conversational Agent and RAG
 
-## Foundation status
+## Runtime status
 
-Foundation/governance only, delivered for review on 2026-09-13. MedQuAD and MTS-Dialog raw datasets, their READMEs/licenses, and placeholder app directories exist. No parser pipeline, embeddings, index, LLM integration, runtime, tests or CI exists yet. Documentation, repo-local skills and support templates describe future approved work; there are no application install/run commands to execute yet.
+HS-013 adds the internal FastAPI RAG and safety Agent MVP. MedQuAD supplies source-bearing retrieval knowledge; MTS-Dialog informs bounded follow-up/evaluation behavior. The Agent explains only supplied predictive assessments and never creates or changes a score.
 
 Exactly four independent repositories: browser → frontend → backend → PostgreSQL; backend → AI and backend → Agent. Frontend never calls specialized services directly. Backend owns application data/access, while each repository owns its own architecture/governance. Cross-repository delivery belongs in GitHub Issues/Project after approval.
 
@@ -17,10 +17,12 @@ One account = one health profile; English MVP. Guardian/family/multi-profile acc
 - [Healthcare Safety](docs/safety/HEALTHCARE_SAFETY.md)
 - [Testing Strategy](docs/testing/TESTING_STRATEGY.md)
 - [Proposed GitHub issues](docs/planning/PROPOSED_ISSUES.md)
+- [HS-013 implementation and local run guide](docs/IMPLEMENTATION.md)
+- [Dataset provenance](docs/DATA_PROVENANCE.md)
 
 ## Local configuration and delivery
 
-`.env.example` documents placeholders only; `.env` is ignored and must never be committed. Runtime tickets must validate required configuration before startup. Use short-lived branches → PR → main, no develop; no silent merge. The approved roadmap exists as live GitHub issues; issues coordinate work but do not by themselves authorize implementation.
+Use Python 3.13 and `uv`. Run `uv sync --locked --dev`, build the ignored local index with `uv run healthsphere-build-index`, then configure `.env` and start `uv run uvicorn app.main:create_app --factory`. Run `uv run ruff format --check .`, `uv run ruff check .`, and `uv run pytest` before review. See the implementation guide for API, safety, evaluation, and provider configuration.
 
 ## Dataset responsibilities
 
