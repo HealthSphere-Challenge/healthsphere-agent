@@ -1,6 +1,6 @@
 # Agent architecture
 
-Status: approved service responsibility; current app directories are placeholders. Python 3.13 with `uv` is the approved baseline; exact dependencies remain pending HS-013. No LLM integration, corpus/index, RAG or API is implemented. See the [Agent contract](AGENT_CONTRACT.md).
+Status: HS-013 runtime implemented for review. Python 3.13.11 and locked `uv` dependencies are the executable baseline. See the [Agent contract](AGENT_CONTRACT.md) and [implementation guide](../IMPLEMENTATION.md).
 
 Browser → frontend → backend → Agent. Backend owns application users, profile, authorized conversation access and persistence. Agent owns retrieval, prompt/conversation orchestration, LLM adapter and safety behavior. No direct browser access or application PostgreSQL access. Agent never invents a predictive score or substitutes for the AI service; backend may supply immutable model-provenance-bearing assessment context for explanation.
 
@@ -20,6 +20,6 @@ Conversation persistence and ownership stay in backend; Agent receives only boun
 
 Agent and backend co-review input limits, safety state enums, follow-up representation, citation format, provider errors, provenance and versioning. Approved response types distinguish `answer`, `follow_up`, `abstention`, and `urgent`; dependency failure uses the canonical error contract. The service endpoint is `/internal/v1/agent/responses`. Preserve source/corpus/prompt/model version metadata as applicable; avoid exposing private prompts or unnecessary context.
 
-Provider/model, embedding model, vector storage, chunk sizes, retrieval parameters and provider data handling remain unresolved. Backend requests use an opaque bearer credential with a 2-second connect and 30-second total timeout; credential provisioning remains pending deployment. Remaining decisions must be justified against local corpus size, evaluation, cost/privacy and deployment requirements rather than introduced as dependencies silently.
+HS-013 selects a server-configured OpenAI-compatible provider adapter, local sparse hashing vectors, deterministic QA chunking, cosine top-4 retrieval, and ignored JSON artifacts. Backend requests use an opaque bearer credential with a 2-second connect and 30-second total timeout; credential provisioning remains pending deployment.
 
 See [RAG](../rag/RAG_PIPELINE.md), [safety](../safety/HEALTHCARE_SAFETY.md), [evaluation](../evaluation/EVALUATION_STRATEGY.md) and [testing](../testing/TESTING_STRATEGY.md).

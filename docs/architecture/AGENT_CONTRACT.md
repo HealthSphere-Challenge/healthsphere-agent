@@ -1,6 +1,6 @@
 # Backend–Agent contract
 
-Status: stable transport is **APPROVED CONTRACT for HS-002; documentation only**. Retrieval, safety taxonomy, prompts, limits, and user-facing behavior are **PENDING HS-013**. No endpoint, index, provider call, or assistant behavior is implemented here.
+Status: stable transport is the **APPROVED IMPLEMENTED CONTRACT**. HS-013 defines the retrieval, safety, prompt, context-limit, and response behavior below.
 
 Contract revision: `phase1-hs002-2026-09-13`. Agent owns Pydantic producer/consumer schemas for this boundary; the backend contract is the application-level companion.
 
@@ -19,9 +19,9 @@ The backend alone calls `POST /internal/v1/agent/responses` using a service-spec
 }
 ```
 
-`conversation_ref` is pseudonymous and not the application user ID. The backend sends only the minimum authorized context needed for this turn. Context is bounded; exact character/token/turn/item caps are **PENDING HS-013**. Omitted context was not supplied, null means unavailable/unknown, and an empty array means no items. Assessment context, when present, is immutable provenance-bearing output from AI; Agent cannot create or change its score.
+`conversation_ref` is pseudonymous and not the application user ID. The backend sends only the minimum authorized context needed for this turn. User messages and turn content are capped at 2,000 characters, recent history at 6 turns, and measurements at 20 items. Omitted context was not supplied, null means unavailable/unknown, and an empty array means no items. Assessment context, when present, is immutable provenance-bearing output from AI; Agent cannot create or change its score.
 
-## Response — APPROVED CONTRACT shape, PENDING HS-013 behavior
+## Response — APPROVED CONTRACT
 
 Agent returns exactly one `response_type`: `answer`, `follow_up`, `abstention`, or `urgent`. Backend and frontend preserve the state rather than converting it into generic success.
 
@@ -45,7 +45,7 @@ Agent returns exactly one `response_type`: `answer`, `follow_up`, `abstention`, 
 }
 ```
 
-The example is synthetic and establishes shape only. Exact source fields, allowed URLs, safety reason taxonomy, required wording, retrieval/prompt/model values, and when content may be null are **PENDING HS-013**. An `abstention` explicitly represents insufficient evidence or inability to answer. An `urgent` response routes to approved urgent guidance. Neither is an inferred diagnosis.
+The example is synthetic and establishes shape. HS-013 requires `content` for every state, exact retrieved chunk or supplied-assessment source identifiers for answers, and versioned provenance. An `abstention` represents insufficient evidence or a safety boundary. An `urgent` response routes to immediate-care guidance. Neither is an inferred diagnosis.
 
 Canonical failures use:
 

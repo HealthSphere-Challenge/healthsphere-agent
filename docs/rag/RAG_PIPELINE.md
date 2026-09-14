@@ -1,6 +1,6 @@
 # RAG pipeline and corpus provenance
 
-Status: planned; no indexing in Stage 2. [Verified MedQuAD inventory](../../data/medquad/README.md) is authoritative for local counts: 47,441 pairs, 16,407 nonempty answers. Do not index the 31,034 empty-answer entries or claim the advertised dataset size is usable corpus size.
+Status: implemented by HS-013. [Verified MedQuAD inventory](../../data/medquad/README.md) is authoritative: 47,441 pairs, 16,407 indexed nonempty answers and 31,034 excluded empty answers.
 
 ## Source and cleaning
 
@@ -10,12 +10,12 @@ Normalize whitespace/markup while preserving medical wording, units and qualifie
 
 ## Chunking and retrieval
 
-Prefer coherent question/answer context and section boundaries. Decide chunk length/overlap by tokenizer and retrieval evaluation, not arbitrary numbers copied from a tutorial. Retain source identifiers and chunk boundaries. Choose/version embedding model, dimensions and preprocessing; query and index embeddings must be compatible. Vector storage/metric/top-k/reranking and threshold decisions remain unresolved until HS-013 evaluation.
+The versioned configuration keeps QA pairs intact up to 1,200 characters, then splits at word boundaries with 150-character overlap. It uses 16,384-dimensional sparse hashing TF vectors, cosine similarity, top-k 4, and minimum score 0.20. Source identifiers and chunk boundaries remain attached.
 
 Retrieve only approved corpus content; patient conversation history is not automatically added to the knowledge index. Retrieved instructions cannot override system/task/safety boundaries. When no relevant evidence exists, abstain or ask a useful follow-up; do not force a confident answer.
 
 ## Corpus version and artifact record
 
-Raw fingerprint is recorded in the dataset README. A future retrieval corpus version must bind raw hashes, parser/cleaning code revision, exclusions and counts, chunk rules, embedding model/version, index settings, corpus build timestamp and artifact digest. Keep derived content under ignored `data/medquad/processed/` and index artifacts under an approved ignored artifact path. Release/version strategy remains unresolved; do not call the raw fingerprint a released index.
+Index metadata binds raw fingerprint, parser/cleaning version, exclusions and counts, chunk rules, embedding version/dimension, index settings and generation time. Generated artifacts remain ignored under `artifacts/`; the build command never runs during requests.
 
 Evaluate retrieval with held-out queries, relevance judgments, source coverage and no-result scenarios. Measure Recall@k/MRR or another justified measure and report sample size; choose retrieval settings on development evaluation only. Response grounding needs separate Agent evaluation. No claimed retrieval score exists today.

@@ -296,12 +296,11 @@ The AI Agent is responsible for conversation, explanation and information retrie
 - [x] Main dataset selected
 - [x] Dataset source documented
 - [x] License preserved
-- [ ] Conversation analysis
-- [ ] Dialogue preprocessing
-- [ ] Follow-up pattern extraction
-- [ ] Agent prompt design
-- [ ] Conversation evaluation
-- [ ] Integration with HealthSphere AI Agent
+- [x] Deterministic split-preserving conversation analysis
+- [x] Bounded follow-up pattern analysis
+- [x] Synthetic conversational evaluation fixtures
+- [x] Agent prompt and follow-up behavior
+- [ ] Broader live-provider conversational evaluation
 
 ---
 

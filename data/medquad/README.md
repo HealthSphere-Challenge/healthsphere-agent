@@ -473,15 +473,14 @@ During Phase 0:
 - [x] Dataset role defined
 - [x] License information preserved
 - [ ] Dataset exploration
-- [ ] XML/data parsing
-- [ ] Data cleaning
-- [ ] Data normalization
-- [ ] Chunking
-- [ ] Embedding generation
-- [ ] Vector database integration
-- [ ] Retriever implementation
-- [ ] RAG evaluation
-- [ ] AI Agent integration
+- [x] XML/data parsing
+- [x] Conservative cleaning and normalization
+- [x] Deterministic chunking
+- [x] Sparse hashing embedding generation
+- [x] Local versioned vector index
+- [x] Retriever implementation
+- [x] Initial deterministic RAG evaluation
+- [x] Agent integration
 
 ---
 
@@ -558,4 +557,4 @@ Counts use XML `QAPair` elements and non-whitespace text within `Answer`, includ
 
 Raw inventory fingerprint (not a released retrieval corpus version): `sha256:0c998a31f0c13ac9886d6d963a055602c59f663115542a00c6bf2c1b98f3978f`. Calculation: for all XML paths sorted lexically relative to `raw/`, concatenate UTF-8 `relative/path\t<file SHA-256>\n`, then SHA-256 that manifest.
 
-No processed corpus, embeddings, index or retrieval score exists. Record source path/URL, question/answer identity, cleaning version and exclusion reasons during HS-013. See [RAG pipeline](../../docs/rag/RAG_PIPELINE.md) for corpus versioning and evaluation.
+HS-013 provides a reproducible ignored local index and deterministic evaluation commands. The full build produced 16,407 documents and 27,519 chunks and excluded all 31,034 empty answers. Generated artifacts remain outside Git; see [RAG pipeline](../../docs/rag/RAG_PIPELINE.md) for versions and limitations.
